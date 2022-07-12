@@ -1,0 +1,34 @@
+## idea ##
+.idea/
+*.ipr
+*.iml
+*.iws
+
+## eclipse ##
+.settings/
+.classpath
+.project
+
+## temp ##
+logs/
+*.class
+*.log
+*.tmp
+*.cache
+*.diff
+*.patch
+
+## maven ##
+/bin/
+/mvn-eclipse.bat
+/mvn-package.bat
+/mvn-tree.bat
+/.mvn
+target/
+/**/target
+
+## system ##
+.DS_Store
+Thumbs.db
+
+
