@@ -19,12 +19,12 @@ public class CBTInserter {
         do  {
             treeIndex++;
 
-            String indexBits = Integer.toBinaryString(treeIndex);
+            int highBit = 31 - Integer.numberOfLeadingZeros(treeIndex);
             // root 永远在第一位
             cur = root;
-            for (int i = 1; i < indexBits.length(); i++) {
-                char indexBit = indexBits.charAt(i);
-                if(indexBit == '0') {
+
+            for (int i = highBit - 1; i >= 0; i--) {
+                if ((treeIndex & (1 << i)) == 0) {
                     cur = cur.left;
                 } else {
                     cur = cur.right;
@@ -38,24 +38,24 @@ public class CBTInserter {
         int insertIndex = treeIndex + 1;
         TreeNode parent;
 
-        String indexBits = Integer.toBinaryString(treeIndex);
+        int highBit = 31 - Integer.numberOfLeadingZeros(treeIndex);
         // root 永远在第一位
         parent = root;
-        for (int i = 1; i < indexBits.length() - 1; i++) {
-            char indexBit = indexBits.charAt(i);
-            if(indexBit == '0') {
+
+        for (int i = highBit - 1; i >= 1; i--) {
+            if ((treeIndex & (1 << i)) == 0) {
                 parent = parent.left;
             } else {
                 parent = parent.right;
             }
         }
 
-        char indexBit = indexBits.charAt(indexBits.length() - 1);
-        if(indexBit == '0') {
+        if((treeIndex & 1) == 0) {
             parent.left = new TreeNode(val);
         } else {
             parent.right = new TreeNode(val);
         }
+
         treeIndex = insertIndex;
         return parent.val;
     }
