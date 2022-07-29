@@ -19,6 +19,41 @@ public class SkiplistTest extends BaseSolutionTest {
 
     static final int lineNum = 3;
 
+    @Test
+    public void test() throws Exception {
+        Skiplist skiplist = new Skiplist();
+
+        skiplist.add(5);
+        skiplist.add(1);
+
+        print(skiplist);
+
+        Assert.assertTrue(skiplist.search(5));
+
+        Assert.assertTrue(skiplist.erase(5));
+
+        print(skiplist);
+
+        Assert.assertFalse(skiplist.search(5));
+    }
+
+    @Test
+    public void testOnce() throws Exception {
+        Skiplist skiplist = new Skiplist();
+        testOnce(lineNum, skiplist);
+    }
+
+    @Test
+    public void testAll() throws Exception {
+        Skiplist skiplist = new Skiplist();
+        testAll(lineNum, skiplist);
+    }
+
+    @Override
+    protected <T> void doTest(T instance, List<String> lines) throws Exception {
+        doTest((Skiplist)instance, lines);
+    }
+
     protected void doTest(Skiplist skiplist, List<String> lines) throws Exception {
 
         String[] commands = parse(lines.get(0), new TypeReference<String[]>() {});
@@ -65,24 +100,6 @@ public class SkiplistTest extends BaseSolutionTest {
         Assert.assertArrayEquals(expecteds, actuals);
     }
 
-    @Test
-    public void test() throws Exception {
-        Skiplist skiplist = new Skiplist();
-
-        skiplist.add(5);
-        skiplist.add(1);
-
-        print(skiplist);
-
-        Assert.assertTrue(skiplist.search(5));
-
-        Assert.assertTrue(skiplist.erase(5));
-
-        print(skiplist);
-
-        Assert.assertFalse(skiplist.search(5));
-    }
-
     protected void print(Skiplist skiplist) {
         for (int i = skiplist.level; i >= Skiplist.MinLevel; i--) {
             Skiplist.ListNode cur = skiplist.header;
@@ -91,27 +108,6 @@ public class SkiplistTest extends BaseSolutionTest {
                 cur = cur.forward[i];
             }
             System.out.println();
-        }
-    }
-
-    @Test
-    public void testOnce() throws Exception {
-        List<String> lines = readLines(lineNum);
-        Skiplist skiplist = null;
-        doTest(skiplist, lines);
-    }
-
-    @Test
-    public void testAll() throws Exception {
-        Skiplist skiplist = null;
-        while (true) {
-            List<String> lines = readLines(lineNum);
-            if (lines.size() != lineNum) {
-                break;
-            }
-            lines.forEach(System.out::println);
-            System.out.println("\n--------------------------------------\n");
-            doTest(skiplist, lines);
         }
     }
 }

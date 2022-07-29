@@ -15,7 +15,7 @@ import java.util.List;
  * @author lazyboywu
  * @since
  */
-public class BaseSolutionTest {
+public abstract class BaseSolutionTest {
     public BufferedReader reader;
     ObjectMapper mapper = new ObjectMapper();
     public BaseSolutionTest() {
@@ -48,4 +48,28 @@ public class BaseSolutionTest {
 
         return list.stream().map(List::toArray).toArray(String[][]::new);
     }
+
+    public <T> void testOnce(int lineNum, T instance) throws Exception  {
+        List<String> lines = readLines(lineNum);
+        if (lines.size() < lineNum) {
+            throw new Exception("testcase error");
+        }
+        lines.forEach(System.out::println);
+        doTest(instance, lines);
+    }
+
+
+    public <T> void testAll(int lineNum, T instance) throws Exception {
+        while (true) {
+            List<String> lines = readLines(lineNum);
+            if (lines.size() != lineNum) {
+                break;
+            }
+            lines.forEach(System.out::println);
+            doTest(instance, lines);
+            System.out.println("\n--------------------------------------\n");
+        }
+    }
+
+    protected abstract <T> void doTest(T instance, List<String> lines) throws Exception;
 }

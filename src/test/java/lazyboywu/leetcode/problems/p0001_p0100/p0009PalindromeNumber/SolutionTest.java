@@ -19,6 +19,27 @@ public class SolutionTest extends BaseSolutionTest {
 
     static final int lineNum = 2;
 
+    @Test
+    public void test() throws Exception {
+    }
+
+    @Test
+    public void testOnce() throws Exception {
+        Solution solution = new Solution();
+        testOnce(lineNum, solution);
+    }
+
+    @Test
+    public void testAll() throws Exception {
+        Solution solution = new Solution();
+        testAll(lineNum, solution);
+    }
+
+    @Override
+    protected <T> void doTest(T instance, List<String> lines) throws Exception {
+        doTest((Solution)instance, lines);
+    }
+
     protected void doTest(Solution solution, List<String> lines) throws Exception {
 
         Integer num = parse(lines.get(0), new TypeReference<Integer>() {});
@@ -27,43 +48,5 @@ public class SolutionTest extends BaseSolutionTest {
         Boolean actual = solution.isPalindrome(num);
 
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test() throws Exception {
-        Solution solution = new Solution();
-        int x = 10001;
-        assertEquals(1, solution.get10Bit(10001, 0));
-        assertEquals(0, solution.get10Bit(10001, 1));
-        assertEquals(0, solution.get10Bit(10001, 2));
-        assertEquals(0, solution.get10Bit(10001, 3));
-        assertEquals(1, solution.get10Bit(10001, 4));
-
-        assertEquals(1, solution.get10Bit(121, 2));
-    }
-
-    @Test
-    public void testOnce() throws Exception {
-        List<String> lines = readLines(lineNum);
-        if (lines.size() < lineNum) {
-            throw new Exception("testcase error");
-        }
-        lines.forEach(System.out::println);
-        Solution solution = new Solution();
-        doTest(solution, lines);
-    }
-
-    @Test
-    public void testAll() throws Exception {
-        Solution solution = new Solution();
-        while (true) {
-            List<String> lines = readLines(lineNum);
-            if (lines.size() != lineNum) {
-                break;
-            }
-            lines.forEach(System.out::println);
-            doTest(solution, lines);
-            System.out.println("\n--------------------------------------\n");
-        }
     }
 }

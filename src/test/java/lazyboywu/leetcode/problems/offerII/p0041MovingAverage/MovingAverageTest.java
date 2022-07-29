@@ -21,6 +21,27 @@ public class MovingAverageTest extends BaseSolutionTest {
 
     static final int lineNum = 3;
 
+    @Test
+    public void test() throws Exception {
+    }
+
+    @Test
+    public void testOnce() throws Exception {
+        MovingAverage movingAverage = null;
+        testOnce(lineNum, movingAverage);
+    }
+
+    @Test
+    public void testAll() throws Exception {
+        MovingAverage movingAverage = null;
+        testAll(lineNum, movingAverage);
+    }
+
+    @Override
+    protected <T> void doTest(T instance, List<String> lines) throws Exception {
+        doTest((MovingAverage)instance, lines);
+    }
+
     protected void doTest(MovingAverage movingAverage, List<String> lines) throws Exception {
 
         String[] commands = parse(lines.get(0), new TypeReference<String[]>() {});
@@ -52,27 +73,6 @@ public class MovingAverageTest extends BaseSolutionTest {
         }
 
         Assert.assertArrayEquals(expecteds, actuals);
-    }
-
-    @Test
-    public void testOnce() throws Exception {
-        List<String> lines = readLines(lineNum);
-        MovingAverage movingAverage = null;
-        doTest(movingAverage, lines);
-    }
-
-    @Test
-    public void testAll() throws Exception {
-        MovingAverage movingAverage = null;
-        while (true) {
-            List<String> lines = readLines(lineNum);
-            if (lines.size() != lineNum) {
-                break;
-            }
-            lines.forEach(System.out::println);
-            System.out.println("\n--------------------------------------\n");
-            doTest(movingAverage, lines);
-        }
     }
 
     protected double scaleValue(double value) {

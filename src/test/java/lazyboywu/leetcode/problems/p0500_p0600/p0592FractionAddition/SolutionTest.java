@@ -19,6 +19,27 @@ public class SolutionTest extends BaseSolutionTest {
 
     static final int lineNum = 2;
 
+    @Test
+    public void test() throws Exception {
+    }
+
+    @Test
+    public void testOnce() throws Exception {
+        Solution solution = new Solution();
+        testOnce(lineNum, solution);
+    }
+
+    @Test
+    public void testAll() throws Exception {
+        Solution solution = new Solution();
+        testAll(lineNum, solution);
+    }
+
+    @Override
+    protected <T> void doTest(T instance, List<String> lines) throws Exception {
+        doTest((Solution)instance, lines);
+    }
+
     protected void doTest(Solution solution, List<String> lines) throws Exception {
 
         String expression = parse(lines.get(0), new TypeReference<String>() {});
@@ -27,30 +48,5 @@ public class SolutionTest extends BaseSolutionTest {
         String actual = solution.fractionAddition(expression);
 
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testOnce() throws Exception {
-        List<String> lines = readLines(lineNum);
-        if (lines.size() < lineNum) {
-            throw new Exception("testcase error");
-        }
-        lines.forEach(System.out::println);
-        Solution solution = new Solution();
-        doTest(solution, lines);
-    }
-
-    @Test
-    public void testAll() throws Exception {
-        Solution solution = new Solution();
-        while (true) {
-            List<String> lines = readLines(lineNum);
-            if (lines.size() != lineNum) {
-                break;
-            }
-            lines.forEach(System.out::println);
-            System.out.println("\n--------------------------------------\n");
-            doTest(solution, lines);
-        }
     }
 }

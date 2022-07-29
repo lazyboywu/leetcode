@@ -19,6 +19,27 @@ public class WordFilterTest extends BaseSolutionTest {
 
     static final int lineNum = 3;
 
+    @Test
+    public void test() throws Exception {
+    }
+
+    @Test
+    public void testOnce() throws Exception {
+        WordFilter solution = null;
+        testOnce(lineNum, solution);
+    }
+
+    @Test
+    public void testAll() throws Exception {
+        WordFilter solution = null;
+        testAll(lineNum, solution);
+    }
+
+    @Override
+    protected <T> void doTest(T instance, List<String> lines) throws Exception {
+        doTest((WordFilter)instance, lines);
+    }
+
     protected void doTest(WordFilter wordFilter, List<String> lines) throws Exception {
 
         String[] commands = parse(lines.get(0), new TypeReference<String[]>() {});
@@ -51,26 +72,5 @@ public class WordFilterTest extends BaseSolutionTest {
         }
 
         Assert.assertArrayEquals(expecteds, actuals);
-    }
-
-    @Test
-    public void testOnce() throws Exception {
-        List<String> lines = readLines(lineNum);
-        WordFilter wordFilter = null;
-        doTest(wordFilter, lines);
-    }
-
-    @Test
-    public void testAll() throws Exception {
-        WordFilter wordFilter = null;
-        while (true) {
-            List<String> lines = readLines(lineNum);
-            if (lines.size() != lineNum) {
-                break;
-            }
-            lines.forEach(System.out::println);
-            System.out.println("\n--------------------------------------\n");
-            doTest(wordFilter, lines);
-        }
     }
 }
