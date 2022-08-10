@@ -1,4 +1,4 @@
-package lazyboywu.leetcode.problems.p1400_p1500.p1403MinSubsequence;
+package lazyboywu.leetcode.problems.p1400_p1500.p1413MinStartValue;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lazyboywu.leetcode.problems.BaseSolutionTest;
@@ -43,9 +43,9 @@ public class SolutionTest extends BaseSolutionTest {
     protected void doTest(Solution solution, List<String> lines) throws Exception {
 
         int[] nums = parse(lines.get(0), new TypeReference<int[]>() {});
-        List<Integer> expected = parse(lines.get(1), new TypeReference<List<Integer>>() {});
+        int expected = parse(lines.get(1), new TypeReference<Integer>() {});
 
-        List<Integer> actual = solution.minSubsequence(nums);
+        int actual = solution.minStartValue(nums);
         System.out.println(actual);
         Assert.assertEquals(expected, actual);
     }
